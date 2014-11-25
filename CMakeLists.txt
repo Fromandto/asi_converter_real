@@ -12,6 +12,10 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_search_module(LIBUSB1 REQUIRED libusb-1.0)
+include_directories(${LIBUSB1_INCLUDE_DIRS})
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -98,7 +102,9 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
-
+include_directories(/usr/local/include)
+#include_directories(${LIBUSB_1_INCLUDE_DIRS})
+include_directories(/root/catkin_ws/src/asi_converter_real/include/asi_converter_real)
 ## Declare a cpp library
 # add_library(asi_converter_real
 #   src/${PROJECT_NAME}/asi_converter_real.cpp
@@ -138,7 +144,8 @@ include_directories(
 # )
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
+# install(DIRECTORY include/${PROJECT_NAME}ONTROL_BADWIDTHOVERLOAD’ was not declared in this scope
+
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 #   FILES_MATCHING PATTERN "*.h"
 #   PATTERN ".svn" EXCLUDE
@@ -163,3 +170,14 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+link_directories(/home/vincent/Desktop/asi/lib/x64)
+link_directories(/usr/local/lib)
+#link_directories(/usr/lib/x86_64-linux-gnu)
+link_libraries(pthread)
+link_libraries(usb)
+link_libraries(libASICamera.a)
+link_libraries(libASICamera.so)
+#link_librariemera2.a)
+#link_libraries(libASICamera2.so)
+add_executable(asi_converter_real src/asi_converter_real.cpp)
+target_link_libraries(asi_converter_real ${catkin_LIBRARIES} ${LIBUSB1_LIBRARIES})
